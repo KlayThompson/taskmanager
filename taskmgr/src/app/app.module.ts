@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { MatSidenavModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     MatSidenavModule,
     BrowserAnimationsModule,
     CoreModule

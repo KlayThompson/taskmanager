@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { MatSidenavModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -10,6 +12,8 @@ import { CoreModule } from './core/core.module';
   ],
   imports: [
     BrowserModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
     CoreModule
   ],
   providers: [],

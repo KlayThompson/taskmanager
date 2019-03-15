@@ -1,0 +1,7 @@
+<app-projec-item *ngFor="let projcet of projects" [item]="projcet" class="card" (inviteEmit)="openInviteUserDialog()">
+
+</app-projec-item>
+
+<button mat-fab type="button" (click)="openNewProjectClick()" class="fab-button">
+  <mat-icon>add</mat-icon>
+</button>

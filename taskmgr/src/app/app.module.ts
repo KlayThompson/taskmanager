@@ -7,6 +7,7 @@ import { MatSidenavModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {ProjectModule} from './project/project.module';
+import {TaskModule} from './task/task.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {ProjectModule} from './project/project.module';
     MatSidenavModule,
     BrowserAnimationsModule,
     ProjectModule,
+    TaskModule,
     CoreModule
   ],
   providers: [],

@@ -1,0 +1,28 @@
+.container {
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.due-date {
+  background-color: #ff4f3e;
+  color: #fff;
+}
+
+.bottom-bar{
+  margin-top: 3px;
+  margin-bottom: 2px;
+  font-size: 10px;
+  width: 100px;
+  order: 1;
+}
+
+.content {
+  order: 1;
+  width: 100%;
+  padding: 5px;
+}
+
+.alarm {
+  font-size: 18px;
+}

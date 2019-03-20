@@ -22,7 +22,8 @@ export class TaskHomeComponent implements OnInit {
             avatar: 'avatars:svg-11'
           },
           dueDate: new Date(),
-          reminder: new Date()
+          reminder: new Date(),
+          priority: 1
         },
         {
           id: 2,
@@ -34,6 +35,7 @@ export class TaskHomeComponent implements OnInit {
             avatar: 'avatars:svg-12'
           },
           dueDate: new Date(),
+          priority: 2
         },
         {
           id: 3,
@@ -45,7 +47,8 @@ export class TaskHomeComponent implements OnInit {
             avatar: 'avatars:svg-11'
           },
           dueDate: new Date(),
-          reminder: new Date()
+          reminder: new Date(),
+          priority: 1
         }
       ],
     },
@@ -63,6 +66,7 @@ export class TaskHomeComponent implements OnInit {
             avatar: 'avatars:svg-13'
           },
           dueDate: new Date(),
+          priority: 2
         },
         {
           id: 2,
@@ -74,6 +78,7 @@ export class TaskHomeComponent implements OnInit {
             avatar: 'avatars:svg-12'
           },
           dueDate: new Date(),
+          priority: 3
         }
       ],
     }

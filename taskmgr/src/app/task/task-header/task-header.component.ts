@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-task-header',
@@ -8,9 +8,13 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TaskHeaderComponent implements OnInit {
 
   @Input() header: string;
+  @Output() newTask = new EventEmitter<void>();
   constructor() { }
 
   ngOnInit() {
   }
 
+  newTaskButtonClick() {
+    this.newTask.emit();
+  }
 }

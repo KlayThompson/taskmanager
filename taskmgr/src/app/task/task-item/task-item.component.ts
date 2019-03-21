@@ -16,4 +16,7 @@ export class TaskItemComponent implements OnInit {
     console.log(this.avatar);
   }
 
+  checkBoxClick(event) {
+    event.stopPropagation();
+  }
 }

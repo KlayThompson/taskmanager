@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {NewProjectComponent} from '../new-project/new-project.component';
 import {InviteComponent} from '../invite/invite.component';
+import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-project-list',
@@ -28,7 +29,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   openNewProjectClick() {
-   const dialogRef = this.dialog.open(NewProjectComponent, {data: 'this is a message from project list'});
+   const dialogRef = this.dialog.open(NewProjectComponent, {data: {title: '新建项目'}});
    dialogRef.afterClosed().subscribe(data => console.log(data));
   }
 
@@ -36,5 +37,14 @@ export class ProjectListComponent implements OnInit {
     console.log('收到了邀请');
     const dialogRef = this.dialog.open(InviteComponent);
     dialogRef.afterClosed().subscribe();
+  }
+
+  openConfirmDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: '删除项目', content: '您确认删除本项目所有内容吗？'}});
+    dialogRef.afterClosed().subscribe(res => console.log(res));
+  }
+
+  openNewProjectDialog() {
+    this.dialog.open(NewProjectComponent, {data: {title: '修改项目'}});
   }
 }

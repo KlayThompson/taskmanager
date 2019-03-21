@@ -1,10 +1,16 @@
 <div class="task-lists">
   <app-task-list *ngFor="let list of lists" class="list-container">
-    <app-task-header [header]="list.name" (newTask)="openNewTaskDialog()"></app-task-header>
-    <app-task-item *ngFor="let task of list.tasks" [item]="task"></app-task-item>
+    <app-task-header
+      [header]="list.name"
+      (newTask)="openNewTaskDialog()"
+      (removeAll)="openRemoveAllDialog()"
+      (editTaskList)="openEditNewTaskListDialog()"
+      (delEmit)="openConfirmDialog()"
+    ></app-task-header>
+    <app-task-item *ngFor="let task of list.tasks" [item]="task" (click)="openEditDialog(task)"></app-task-item>
   </app-task-list>
 </div>
 
-<button mat-fab class="fab-button" type="button">
+<button mat-fab class="fab-button" type="button" (click)="openNewTaskListDialog()">
   <mat-icon>add</mat-icon>
 </button>

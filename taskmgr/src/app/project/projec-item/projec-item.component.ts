@@ -9,6 +9,9 @@ export class ProjecItemComponent implements OnInit {
 
   @Input() item;
   @Output() inviteEmit = new EventEmitter();
+  @Output() delEmit = new EventEmitter();
+  @Output() editEmit = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
@@ -17,5 +20,13 @@ export class ProjecItemComponent implements OnInit {
   inviteUserClick() {
     console.log('点击了邀请');
     this.inviteEmit.emit();
+  }
+
+  deleteButtonClick() {
+    this.delEmit.emit();
+  }
+
+  editButtonClick() {
+    this.editEmit.emit();
   }
 }

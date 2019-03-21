@@ -10,6 +10,8 @@ import { loadSvgResources } from '../utils/svg.util';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginModule} from '../login/login.module';
 
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     HeaderComponent,

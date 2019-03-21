@@ -5,7 +5,7 @@
   'priority-important': item.priority === 2,
   'priority-emergency': item.priority === 1
   }">
-  <mat-checkbox class="check-content" [checked]="item.completed"></mat-checkbox>
+  <mat-checkbox class="check-content" [checked]="item.completed" (click)="checkBoxClick($event)"></mat-checkbox>
   <div mat-line class="content" [ngClass]="{'completed': item.completed}">{{item.desc}}</div>
   <div mat-line class="bottom-bar">
     <span class="due-date">{{item.dueDate | date: "yyyy-MM-dd"}}</span>

@@ -1,4 +1,11 @@
-<app-projec-item *ngFor="let projcet of projects" [item]="projcet" class="card" (inviteEmit)="openInviteUserDialog()">
+<app-projec-item
+  *ngFor="let project of projects"
+  [item]="project"
+  class="card"
+  (inviteEmit)="openInviteUserDialog()"
+  (delEmit)="openConfirmDialog()"
+  (editEmit)="openNewProjectDialog()"
+>
 
 </app-projec-item>
 

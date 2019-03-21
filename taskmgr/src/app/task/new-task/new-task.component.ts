@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-new-task',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewTaskComponent implements OnInit {
 
+  title = '';
   priorities = [
     {
       label: '普通',
@@ -21,9 +23,11 @@ export class NewTaskComponent implements OnInit {
       value: 1
     }
     ];
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any) { }
 
   ngOnInit() {
+    this.title = this.data.title;
+    console.log(JSON.stringify(this.data.task));
   }
 
   onSaveClick() {

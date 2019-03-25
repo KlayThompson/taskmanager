@@ -17,10 +17,10 @@ import {TaskModule} from './task/task.module';
     BrowserModule,
     AppRoutingModule,
     MatSidenavModule,
-    BrowserAnimationsModule,
     ProjectModule,
     TaskModule,
-    CoreModule
+    CoreModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

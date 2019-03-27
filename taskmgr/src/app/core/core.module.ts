@@ -25,9 +25,9 @@ import 'hammerjs';
   ],
   imports: [
     HttpClientModule,
-    BrowserAnimationsModule,
     LoginModule,
     SharedModule,
+    BrowserAnimationsModule,
   ]
 })
 export class CoreModule {

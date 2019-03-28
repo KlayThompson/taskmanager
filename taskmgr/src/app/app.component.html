@@ -1,6 +1,6 @@
 <mat-sidenav-container [class.app-dark-theme]="darkTheme">
   <mat-sidenav #sideNav>
-    <app-sidebar></app-sidebar>
+    <app-sidebar (navEmit)="sideNav.toggle()"></app-sidebar>
   </mat-sidenav>
   <div class="site">
     <header>

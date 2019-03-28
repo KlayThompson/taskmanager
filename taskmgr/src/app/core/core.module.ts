@@ -11,6 +11,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginModule} from '../login/login.module';
 
 import 'hammerjs';
+import {AppRoutingModule} from '../app-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,11 +21,14 @@ import 'hammerjs';
   ],
   exports: [
     HeaderComponent,
+    AppRoutingModule,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    BrowserAnimationsModule,
   ],
   imports: [
     HttpClientModule,
+    AppRoutingModule,
     LoginModule,
     SharedModule,
     BrowserAnimationsModule,

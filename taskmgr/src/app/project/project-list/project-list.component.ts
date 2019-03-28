@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {NewProjectComponent} from '../new-project/new-project.component';
 import {InviteComponent} from '../invite/invite.component';
@@ -10,7 +10,8 @@ import {ListAnimation} from '../../anim/list.anim';
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-  animations: [SliderToRightAnim, ListAnimation]
+  animations: [SliderToRightAnim, ListAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectListComponent implements OnInit {
 
@@ -30,7 +31,7 @@ export class ProjectListComponent implements OnInit {
   ]
 
   @HostBinding('@routerAnim') state;
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
@@ -41,6 +42,7 @@ export class ProjectListComponent implements OnInit {
      console.log(data);
      this.projects = [...this.projects, {id: 3, name: 'New Project', desc: 'This is a new project', coverImg: 'assets/img/covers/5.jpg'},
        {id: 4, name: 'New Project Again', desc: 'This is a new project again', coverImg: 'assets/img/covers/6.jpg'}];
+     this.cd.markForCheck();
    });
   }
 
@@ -55,6 +57,7 @@ export class ProjectListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       console.log(res);
       this.projects = this.projects.filter(p => p.id !== project.id);
+      this.cd.markForCheck();
     });
   }
 

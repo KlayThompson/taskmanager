@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {NewTaskComponent} from '../new-task/new-task.component';
 import {CopyTaskComponent} from '../copy-task/copy-task.component';
@@ -10,7 +10,8 @@ import {SliderToRightAnim} from '../../anim/router.anim';
   selector: 'app-task-home',
   templateUrl: './task-home.component.html',
   styleUrls: ['./task-home.component.scss'],
-  animations: [SliderToRightAnim]
+  animations: [SliderToRightAnim],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskHomeComponent implements OnInit {
 
@@ -92,7 +93,7 @@ export class TaskHomeComponent implements OnInit {
   ];
 
   @HostBinding('@routerAnim') state;
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
@@ -119,6 +120,9 @@ export class TaskHomeComponent implements OnInit {
 
   openConfirmDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: '删除任务列表', content: '您确认删除本任务列表所有内容吗？'}});
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.cd.markForCheck();
+    });
   }
 }

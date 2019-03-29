@@ -61,3 +61,12 @@ mat-icon.avatar {
 .checkbox-section {
   border: 0 solid #A6A6A6;
 }
+
+.drag-start {
+  opacity: 0.5;
+  border: 2px dashed #ff525b;
+}
+
+:host{
+  width: 100%;
+}

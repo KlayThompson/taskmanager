@@ -11,6 +11,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginModule} from '../login/login.module';
 
 import 'hammerjs';
+
 import {AppRoutingModule} from '../app-routing.module';
 
 @NgModule({

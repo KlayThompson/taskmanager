@@ -11,9 +11,9 @@ export class DragDirective {
   @Input() draggedClass: string;
   @Input() dragTag: string;
   @Input('app-draggable')
-  set isDraggable(draggable: boolean) {
-    this._isDraggable = draggable;
-    this.rd.setAttribute(this.el.nativeElement, 'draggable', `${draggable}`);
+  set isDraggable(value: boolean) {
+    this._isDraggable = value;
+    this.rd.setAttribute(this.el.nativeElement, 'draggable', `${value}`);
   }
 
   get isDraggable() {

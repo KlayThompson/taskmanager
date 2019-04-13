@@ -13,6 +13,7 @@ import {LoginModule} from '../login/login.module';
 import 'hammerjs';
 
 import {AppRoutingModule} from '../app-routing.module';
+import {ServicesModule} from '../sevice/services.module';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,18 @@ import {AppRoutingModule} from '../app-routing.module';
   imports: [
     HttpClientModule,
     AppRoutingModule,
+    ServicesModule.forRoot(),
     LoginModule,
     SharedModule,
     BrowserAnimationsModule,
+  ],
+  providers: [
+    {
+      provide: 'BASE_CONFIG',
+      useValue: {
+        uri: 'http://localhost:3000'
+      }
+    }
   ]
 })
 export class CoreModule {

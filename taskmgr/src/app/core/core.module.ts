@@ -9,11 +9,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { loadSvgResources } from '../utils/svg.util';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginModule} from '../login/login.module';
-
-import 'hammerjs';
-
 import {AppRoutingModule} from '../app-routing.module';
 import {ServicesModule} from '../sevice/services.module';
+
+import 'hammerjs';
+import '../utils/debug.util';
+
 
 @NgModule({
   declarations: [

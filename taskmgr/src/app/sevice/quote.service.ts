@@ -14,8 +14,9 @@ export class QuoteService {
 
   getQuote(): Observable<Quote> {
     console.log('进来没啊');
-    const url = `${this.config.uri}/quotes/${Math.floor(Math.random() * 10)}`
-    return this.http.get(url).pipe(map(
+    const url = `${this.config.uri}/quotes/${Math.floor(Math.random() * 10)}`;
+    return this.http.get(url)
+      .pipe(map(
       res => res as Quote || new Quote()
     ));
   }

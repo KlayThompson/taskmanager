@@ -49,15 +49,12 @@ export class ProjectService {
   deleteProject(project: ProjectModel): Observable<ProjectModel> {
     // 删除任务
     const delTask$ = from(project.taskLists ? project.taskLists : []).pipe(
-      mergeMap(listId => this.http
-        .delete(`${this.config.uri}/taskLists/${listId}`)),
+      mergeMap(listId => this.http.delete(`${this.config.uri}/taskLists/${listId}`)),
       count()
     );
     const uri = `${this.config.uri}/${this.domain}/${project.id}`;
     return delTask$.pipe(
-      switchMap(() => this.http.delete(uri).pipe(
-        map(p => p as ProjectModel)
-      ))
+      switchMap(() => this.http.delete<ProjectModel>(uri))
     );
   }
 }

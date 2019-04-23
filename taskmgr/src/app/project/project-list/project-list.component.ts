@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {NewProjectComponent} from '../new-project/new-project.component';
 import {InviteComponent} from '../invite/invite.component';
@@ -6,7 +6,7 @@ import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog
 import {SliderToRightAnim} from '../../anim/router.anim';
 import {ListAnimation} from '../../anim/list.anim';
 import {ProjectService} from '../../sevice/project.service';
-import {Observable, range} from 'rxjs';
+import {Observable, range, Subscription} from 'rxjs';
 import {filter, map, reduce, switchMap, take} from 'rxjs/operators';
 import {ProjectModel} from '../../domain/project.model';
 
@@ -17,10 +17,10 @@ import {ProjectModel} from '../../domain/project.model';
   animations: [SliderToRightAnim, ListAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectListComponent implements OnInit {
+export class ProjectListComponent implements OnInit, OnDestroy {
 
   projects;
-
+  sub: Subscription;
   @HostBinding('@routerAnim') state;
   constructor(
     private dialog: MatDialog,
@@ -33,6 +33,12 @@ export class ProjectListComponent implements OnInit {
       this.projects = p;
       this.cd.markForCheck();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   /**
@@ -89,7 +95,12 @@ export class ProjectListComponent implements OnInit {
    */
   openConfirmDialog(project) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: '删除项目', content: '您确认删除本项目所有内容吗？'}});
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().pipe(
+      take(1),
+      filter(n => n),
+      switchMap(_ => this.service.deleteProject(project))
+    )
+      .subscribe(res => {
       console.log(res);
       this.projects = this.projects.filter(p => p.id !== project.id);
       this.cd.markForCheck();

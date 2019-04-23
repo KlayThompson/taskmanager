@@ -52,9 +52,7 @@ export class TaskService {
       priority: task.priority,
       reminder: task.reminder,
     };
-    return this.http.patch(uri, JSON.stringify(updateTask), {headers: this.headers}).pipe(
-      map(res => res as TaskModel)
-    );
+    return this.http.patch<TaskModel>(uri, JSON.stringify(updateTask), {headers: this.headers});
   }
 
   del(task: TaskModel): Observable<TaskModel> {

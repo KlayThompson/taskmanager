@@ -6,6 +6,9 @@ import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog
 import {SliderToRightAnim} from '../../anim/router.anim';
 import {ListAnimation} from '../../anim/list.anim';
 import {ProjectService} from '../../sevice/project.service';
+import {Observable, range} from 'rxjs';
+import {filter, map, reduce, switchMap, take} from 'rxjs/operators';
+import {ProjectModel} from '../../domain/project.model';
 
 @Component({
   selector: 'app-project-list',
@@ -16,7 +19,7 @@ import {ProjectService} from '../../sevice/project.service';
 })
 export class ProjectListComponent implements OnInit {
 
-  projects;;
+  projects;
 
   @HostBinding('@routerAnim') state;
   constructor(
@@ -26,25 +29,64 @@ export class ProjectListComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.service.get('1').subscribe(p => this.projects = p);
+    this.service.get('1').subscribe(p => {
+      this.projects = p;
+      this.cd.markForCheck();
+    });
   }
 
+  /**
+   * 新建项目弹窗
+   */
   openNewProjectClick() {
-   const dialogRef = this.dialog.open(NewProjectComponent, {data: {title: '新建项目'}});
-   dialogRef.afterClosed().subscribe(data => {
-     console.log(data);
-     this.projects = [...this.projects, {id: 3, name: 'New Project', desc: 'This is a new project', coverImg: 'assets/img/covers/5.jpg'},
-       {id: 4, name: 'New Project Again', desc: 'This is a new project again', coverImg: 'assets/img/covers/6.jpg'}];
-     this.cd.markForCheck();
-   });
+    const img = `/assets/img/covers/${Math.floor(Math.random() * 40)}_tn.jpg`;
+    const thumbnails$ = this.getThumbnailsObs();
+    const dialogRef = this.dialog.open(NewProjectComponent, {data: {thumbnails: thumbnails$, img: img}});
+    dialogRef.afterClosed()
+      .pipe(
+        take(1),
+        filter(n => n),
+        map(value => ({...value, coverImg: this.buildImgSrc(value.coverImg)})),
+        switchMap(value => this.service.add(value)),
+      )
+      .subscribe(value => {
+        this.projects = [...this.projects, value];
+        this.cd.markForCheck();
+      });
   }
 
+  /**
+   * 编辑当前项目弹窗
+   * @param project 当前选中的project
+   */
+  openEditProjectClick(project: ProjectModel) {
+    const thumbnails$ = this.getThumbnailsObs();
+    const dialogRef = this.dialog.open(NewProjectComponent, {data: {project: project, thumbnails: thumbnails$}});
+    dialogRef.afterClosed().pipe(
+      take(1),
+      filter(n => n),
+      map(value => ({...value, id: project.id, coverImg: value.coverImg})),
+      switchMap(value => this.service.update(value))
+    ).subscribe(value => {
+      const index = this.projects.map(p => p.id).indexOf(project.id);
+      this.projects = [...this.projects.slice(0, index), value, ...this.projects.slice(index + 1)];
+      this.cd.markForCheck();
+    });
+  }
+
+  /**
+   * 打开邀请弹窗
+   */
   openInviteUserDialog() {
     console.log('收到了邀请');
     const dialogRef = this.dialog.open(InviteComponent);
     dialogRef.afterClosed().subscribe();
   }
 
+  /**
+   * 点击删除二次确认弹窗
+   * @param project 选中的project
+   */
   openConfirmDialog(project) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: '删除项目', content: '您确认删除本项目所有内容吗？'}});
     dialogRef.afterClosed().subscribe(res => {
@@ -54,10 +96,16 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
-  openNewProjectDialog() {
-    const dialogRef = this.dialog.open(NewProjectComponent, {data: {title: '修改项目'}});
-    dialogRef.afterClosed().subscribe(data => {
-        console.log('');
-    });
+  private getThumbnailsObs(): Observable<string[]> {
+    return range(0, 40).pipe(
+      map(i => `/assets/img/covers/${i}_tn.jpg`),
+      reduce((r: string[], x: string) => {
+        return [...r, x];
+      }, [])
+    );
+  }
+
+  private buildImgSrc(img: string): string {
+    return img.indexOf('_') > -1 ? img.split('_', 1)[0] + '.jpg' : img;
   }
 }

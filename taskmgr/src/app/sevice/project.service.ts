@@ -40,9 +40,9 @@ export class ProjectService {
         desc: project.desc,
         coverImg: project.coverImg
       };
-      return this.http.patch(uri, JSON.stringify(needUpdate), {headers: this.headers}).pipe(
-        map(res => res as ProjectModel)
-      );
+      console.log(JSON.stringify(needUpdate));
+
+      return this.http.patch<ProjectModel>(uri, JSON.stringify(needUpdate), {headers: this.headers});
     }
 
     // 删除 delete

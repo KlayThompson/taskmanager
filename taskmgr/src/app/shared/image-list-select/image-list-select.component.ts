@@ -24,7 +24,7 @@ export class ImageListSelectComponent implements ControlValueAccessor {
   @Input() cols = 8;
   @Input() rowHeight = '64px';
   @Input() itemWidth = '80px';
-  @Input() title = '选择封面';
+  @Input() title = '选择封面：';
   @Input() items: string[] = [];
   @Input() useSvgIcon = false;
 

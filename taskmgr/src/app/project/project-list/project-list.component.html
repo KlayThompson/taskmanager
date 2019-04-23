@@ -1,11 +1,11 @@
-<div class="container" [@listAnim]="projects.length">
+<div class="container" [@listAnim]="projects?.length">
   <app-projec-item
     *ngFor="let project of projects"
     [item]="project"
     class="card"
     (inviteEmit)="openInviteUserDialog()"
     (delEmit)="openConfirmDialog(project)"
-    (editEmit)="openNewProjectDialog()"
+    (editEmit)="openEditProjectClick(project)"
   >
   </app-projec-item>
 </div>

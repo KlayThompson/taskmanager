@@ -11,9 +11,8 @@ import {
   differenceInMonths,
   differenceInYears,
   parse,
-  format, isDate, isValid, isFuture
+  format,
 } from 'date-fns';
-import {group} from '@angular/animations';
 import {isValidDate} from '../../utils/date.util';
 
 export enum AgeUnit {

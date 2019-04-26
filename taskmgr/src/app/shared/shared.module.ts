@@ -25,7 +25,12 @@ import { AgeInputComponent } from './age-input/age-input.component';
 import { ChipsListComponent } from './chips-list/chips-list.component';
 
 @NgModule({
-  declarations: [ConfirmDialogComponent, ImageListSelectComponent, AgeInputComponent, ChipsListComponent],
+  declarations: [
+    ConfirmDialogComponent,
+    ImageListSelectComponent,
+    AgeInputComponent,
+    ChipsListComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -76,7 +81,8 @@ import { ChipsListComponent } from './chips-list/chips-list.component';
     ImageListSelectComponent,
     MatButtonToggleModule,
     AgeInputComponent,
-    MatChipsModule
+    MatChipsModule,
+    ChipsListComponent
   ],
   entryComponents: [
     ConfirmDialogComponent

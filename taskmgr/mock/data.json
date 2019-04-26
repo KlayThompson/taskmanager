@@ -42,6 +42,20 @@
       "roleIds": [
         1
       ]
+    },
+    {
+      "password": "Ls1234566",
+      "name": "李六",
+      "avatar": "avatars:svg-2",
+      "email": "liliu@163.com",
+      "id": "BkkDvwee-1212",
+      "projectIds": [
+        "Sk2HaTagb",
+        "Hya1moGb-"
+      ],
+      "roleIds": [
+        1
+      ]
     }
   ],
   "projects": [

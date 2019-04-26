@@ -85,8 +85,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
    */
   openInviteUserDialog() {
     console.log('收到了邀请');
-    const dialogRef = this.dialog.open(InviteComponent);
-    dialogRef.afterClosed().subscribe();
+    const dialogRef = this.dialog.open(InviteComponent, {data: {members: []}});
+    dialogRef.afterClosed().subscribe(value => console.log(JSON.stringify(value)));
   }
 
   /**
